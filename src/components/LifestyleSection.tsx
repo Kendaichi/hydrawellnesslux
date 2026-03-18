@@ -41,7 +41,7 @@ export default function LifestyleSection() {
               onClick={() => setActiveTab(tab)}
               className={`font-body text-xs tracking-[0.15em] uppercase pb-2 border-b-2 transition-all duration-300 ${
                 activeTab === tab
-                  ? "text-gold border-gold"
+                  ? "text-water border-water"
                   : "text-cream/40 border-transparent hover:text-cream/60"
               }`}
             >
