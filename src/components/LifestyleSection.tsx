@@ -23,7 +23,8 @@ export default function LifestyleSection() {
   const [activeTab, setActiveTab] = useState<TabKey>("For You");
 
   return (
-    <section id="lifestyle" className="section-padding bg-ink">
+    <section id="lifestyle" className="section-padding bg-ink relative overflow-hidden">
+      <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full bg-water/[0.025] blur-[130px] pointer-events-none" />
       <div className="max-w-7xl mx-auto">
         <ScrollReveal>
           <p className="eyebrow mb-4 text-center">Lifestyle</p>
