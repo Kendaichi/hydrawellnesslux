@@ -21,7 +21,7 @@ export default function AboutSection() {
             </div>
 
             {/* Pull quote */}
-            <div className="mt-10 border-l-2 border-gold/40 pl-6">
+            <div className="mt-10 border-l-2 border-water/40 pl-6">
               <p className="font-display text-lg md:text-xl italic text-cream/80 leading-relaxed">
                 "Elevating hydration, enhancing wellness, and creating a lifestyle that thrives."
               </p>
