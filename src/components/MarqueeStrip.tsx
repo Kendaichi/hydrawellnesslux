@@ -21,11 +21,18 @@ export default function MarqueeStrip() {
   ));
 
   return (
-    <div className="relative py-5 overflow-hidden border-y border-water/10" style={{ background: "linear-gradient(90deg, #0f1a24, #1a1410, #0f1a24)" }}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="relative py-5 overflow-hidden border-y border-water/10"
+      style={{ background: "linear-gradient(90deg, #0f1a24, #1a1410, #0f1a24)" }}
+    >
       <div className="flex animate-marquee">
         <div className="flex">{content}</div>
         <div className="flex">{content}</div>
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -1,3 +1,3 @@
-# Welcome to your Lovable project
+# HydraWellnessLux
 
-TODO: Document your project here
+Premium Kangen water wellness. Experience the gold standard of hydration.

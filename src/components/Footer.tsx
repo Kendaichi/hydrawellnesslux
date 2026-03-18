@@ -1,14 +1,22 @@
+import { motion } from "framer-motion";
+
 const quickLinks = ["About", "The Water", "Lifestyle", "Testimonials", "Contact"];
 const socialLinks = ["Instagram", "LinkedIn", "YouTube"];
 const legalLinks = ["Privacy Policy", "Terms of Service", "Cookie Policy"];
 
 export default function Footer() {
   return (
-    <footer className="border-t border-gold/10 bg-ink">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16">
-        <div className="grid md:grid-cols-4 gap-10 mb-12">
+    <motion.footer
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className="border-t border-gold/10 bg-ink"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-20 py-12 sm:py-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 mb-10 sm:mb-12">
           {/* Brand */}
-          <div>
+          <div className="col-span-2 md:col-span-1">
             <p className="font-display text-xl text-cream mb-2">HydraWellnessLux</p>
             <p className="font-display text-sm italic text-cream/40">Hydration, Elevated.</p>
           </div>
@@ -62,7 +70,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gold/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="border-t border-gold/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="font-body text-[10px] text-cream/30">
             © 2026 HydraWellnessLux. All rights reserved.
           </p>
@@ -76,6 +84,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 }

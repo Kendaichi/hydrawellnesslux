@@ -19,6 +19,33 @@ const tabs = {
 
 type TabKey = keyof typeof tabs;
 
+const cardContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.09 } },
+};
+const cardItem = {
+  hidden: { opacity: 0, y: 14 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } },
+};
+
+// Border classes for responsive grid dividers
+const getCardBorder = (i: number, total: number) => {
+  const isLast = i === total - 1;
+  const isTopRowMd = i < 2;
+  const isLeftColMd = i % 2 === 0;
+  return [
+    "border-water/10",
+    !isLast && "border-b",
+    isLeftColMd && !isLast && "md:border-r",
+    isTopRowMd && "md:border-b",
+    !isTopRowMd && !isLast && "md:border-b-0",
+    !isLast && "lg:border-r",
+    !isLast && "lg:border-b-0",
+  ]
+    .filter(Boolean)
+    .join(" ");
+};
+
 export default function LifestyleSection() {
   const [activeTab, setActiveTab] = useState<TabKey>("For You");
 
@@ -28,18 +55,18 @@ export default function LifestyleSection() {
       <div className="max-w-7xl mx-auto">
         <ScrollReveal>
           <p className="eyebrow mb-4 text-center">Lifestyle</p>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-cream tracking-tight text-center text-balance mb-12">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-cream tracking-tight text-center text-balance mb-10 sm:mb-12">
             Integrated Into Your World
           </h2>
         </ScrollReveal>
 
-        {/* Tabs */}
-        <div className="flex justify-center gap-8 mb-12">
+        {/* Tabs — flex-wrap prevents overflow on small screens */}
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-8 mb-10 sm:mb-12">
           {(Object.keys(tabs) as TabKey[]).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`font-body text-xs tracking-[0.15em] uppercase pb-2 border-b-2 transition-all duration-300 ${
+              className={`font-body text-xs tracking-[0.15em] uppercase pb-2 border-b-2 transition-all duration-300 whitespace-nowrap ${
                 activeTab === tab
                   ? "text-water border-water"
                   : "text-cream/40 border-transparent hover:text-cream/60"
@@ -54,20 +81,19 @@ export default function LifestyleSection() {
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
+            variants={cardContainer}
+            initial="hidden"
+            animate="show"
+            exit={{ opacity: 0, y: -8, transition: { duration: 0.2 } }}
             className="grid md:grid-cols-2 lg:grid-cols-4 border border-water/10"
           >
             {tabs[activeTab].map((card, i) => (
-              <div
+              <motion.div
                 key={card.title}
-                className={`p-8 md:p-10 group hover:bg-water/[0.03] transition-colors duration-300 ${
-                  i < tabs[activeTab].length - 1 ? "lg:border-r border-water/10" : ""
-                } ${i < 2 ? "md:border-b lg:border-b-0 border-water/10" : ""}`}
+                variants={cardItem}
+                className={`p-6 sm:p-8 md:p-10 group hover:bg-water/[0.03] transition-colors duration-300 ${getCardBorder(i, tabs[activeTab].length)}`}
               >
-                <p className="font-body text-[10px] tracking-[0.2em] uppercase text-water mb-6">
+                <p className="font-body text-[10px] tracking-[0.2em] uppercase text-water mb-5 sm:mb-6">
                   {card.label}
                 </p>
                 <h3 className="font-display text-xl md:text-2xl font-light text-cream tracking-tight mb-4">
@@ -76,7 +102,7 @@ export default function LifestyleSection() {
                 <p className="font-body text-xs font-light text-cream/50 leading-relaxed">
                   {card.body}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
         </AnimatePresence>

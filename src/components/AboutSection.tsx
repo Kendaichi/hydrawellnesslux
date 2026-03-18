@@ -1,28 +1,42 @@
+import { motion } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
 
 const values = ["Purity & Quality", "Wellness-Focused", "Premium Lifestyle", "Sustainability", "Integrity"];
+
+const chipContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+};
+const chipItem = {
+  hidden: { opacity: 0, scale: 0.88, y: 6 },
+  show: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } },
+};
 
 export default function AboutSection() {
   return (
     <section id="about" className="section-padding bg-ink relative overflow-hidden">
       <div className="absolute top-1/3 right-0 w-[350px] h-[350px] rounded-full bg-water/[0.02] blur-[120px] pointer-events-none" />
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 md:gap-20 items-start">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 md:gap-20 items-start">
         {/* Left: decorative */}
         <ScrollReveal>
           <div className="relative">
             {/* Nested gold frames */}
-            <div className="border border-water/15 p-8 md:p-12">
-              <div className="border border-water/10 p-8 md:p-12 relative min-h-[300px] flex items-center justify-center">
+            <div className="border border-water/15 p-6 sm:p-8 md:p-12">
+              <div className="border border-water/10 p-6 sm:p-8 md:p-12 relative min-h-[220px] sm:min-h-[300px] flex items-center justify-center">
                 {/* Giant faint monogram */}
-                <span className="font-display text-[120px] md:text-[180px] font-light text-water/[0.06] select-none leading-none">
+                <motion.span
+                  animate={{ opacity: [0.06, 0.09, 0.06] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                  className="font-display text-[80px] sm:text-[120px] md:text-[160px] font-light text-water select-none leading-none"
+                >
                   HWL
-                </span>
+                </motion.span>
               </div>
             </div>
 
             {/* Pull quote */}
-            <div className="mt-10 border-l-2 border-water/40 pl-6">
-              <p className="font-display text-lg md:text-xl italic text-cream/80 leading-relaxed">
+            <div className="mt-8 sm:mt-10 border-l-2 border-water/40 pl-5 sm:pl-6">
+              <p className="font-display text-base sm:text-lg md:text-xl italic text-cream/80 leading-relaxed">
                 "Elevating hydration, enhancing wellness, and creating a lifestyle that thrives."
               </p>
               <p className="mt-4 font-body text-xs tracking-[0.15em] uppercase text-gold">
@@ -36,7 +50,7 @@ export default function AboutSection() {
         <ScrollReveal delay={0.15}>
           <div>
             <p className="eyebrow mb-4 text-water">Our Story</p>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-cream tracking-tight text-balance mb-8">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-cream tracking-tight text-balance mb-8">
               More Than <span className="text-water-light">Water.</span>
               <br />A Way of Life.
             </h2>
@@ -52,17 +66,24 @@ export default function AboutSection() {
               it is a commitment to living better, every single day.
             </p>
 
-            {/* Value chips */}
-            <div className="flex flex-wrap gap-3">
+            {/* Value chips — staggered entrance */}
+            <motion.div
+              className="flex flex-wrap gap-2 sm:gap-3"
+              variants={chipContainer}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-40px" }}
+            >
               {values.map((v) => (
-                <span
+                <motion.span
                   key={v}
-                  className="px-4 py-2 border border-cream/15 text-cream/50 font-body text-[10px] tracking-[0.15em] uppercase rounded-sm hover:border-water hover:text-water transition-all duration-300"
+                  variants={chipItem}
+                  className="px-3 sm:px-4 py-2 border border-cream/15 text-cream/50 font-body text-[10px] tracking-[0.15em] uppercase rounded-sm hover:border-water hover:text-water transition-all duration-300 cursor-default"
                 >
                   {v}
-                </span>
+                </motion.span>
               ))}
-            </div>
+            </motion.div>
           </div>
         </ScrollReveal>
       </div>
