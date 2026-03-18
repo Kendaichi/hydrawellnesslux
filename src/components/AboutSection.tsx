@@ -11,8 +11,8 @@ export default function AboutSection() {
         <ScrollReveal>
           <div className="relative">
             {/* Nested gold frames */}
-            <div className="border border-gold/15 p-8 md:p-12">
-              <div className="border border-gold/10 p-8 md:p-12 relative min-h-[300px] flex items-center justify-center">
+            <div className="border border-water/15 p-8 md:p-12">
+              <div className="border border-water/10 p-8 md:p-12 relative min-h-[300px] flex items-center justify-center">
                 {/* Giant faint monogram */}
                 <span className="font-display text-[120px] md:text-[180px] font-light text-gold/[0.04] select-none leading-none">
                   HWL
