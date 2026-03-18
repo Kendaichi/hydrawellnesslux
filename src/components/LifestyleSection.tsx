@@ -58,7 +58,7 @@ export default function LifestyleSection() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="grid md:grid-cols-2 lg:grid-cols-4 border border-gold/10"
+            className="grid md:grid-cols-2 lg:grid-cols-4 border border-water/10"
           >
             {tabs[activeTab].map((card, i) => (
               <div
