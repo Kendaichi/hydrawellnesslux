@@ -60,8 +60,8 @@ export function useRippleCanvas(variant: "hero" | "cta" = "hero") {
         y: Math.random() * h,
         vx: (Math.random() - 0.5) * 0.4,
         vy: (Math.random() - 0.5) * 0.4,
-        size: Math.random() * 2.5 + 0.5,
-        alpha: Math.random() * 0.5 + 0.15,
+        size: Math.random() * 2.8 + 0.7,
+        alpha: Math.random() * 0.5 + 0.22,
         color: isBlue
           ? (Math.random() > 0.5 ? waterColor : waterLightColor)
           : goldColor,
@@ -165,13 +165,13 @@ export function useRippleCanvas(variant: "hero" | "cta" = "hero") {
         if (p.y > ch) p.y = 0;
 
         // Pulse alpha
-        const pulseAlpha = p.alpha * (0.6 + 0.4 * Math.sin(time * p.pulseSpeed + p.pulsePhase));
+        const pulseAlpha = p.alpha * (0.65 + 0.35 * Math.sin(time * p.pulseSpeed + p.pulsePhase));
 
         // Glow effect for larger particles
         if (p.size > 1.5) {
           ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${p.color}, ${pulseAlpha * 0.1})`;
+          ctx.arc(p.x, p.y, p.size * 3.5, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${p.color}, ${pulseAlpha * 0.13})`;
           ctx.fill();
         }
 
