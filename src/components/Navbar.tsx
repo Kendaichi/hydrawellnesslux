@@ -25,29 +25,27 @@ export default function Navbar() {
     >
       <div className="flex items-center justify-between px-6 md:px-12 lg:px-20 py-5">
         <a href="#" className="font-display text-xl md:text-2xl font-light text-cream tracking-tight">
-          HydraWellnessLux
+          Hydra<span className="text-water">Wellness</span>Lux
         </a>
 
-        {/* Desktop links */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
               key={link}
               href={`#${link.toLowerCase().replace(/\s/g, "-")}`}
-              className="font-body text-xs tracking-[0.15em] uppercase text-cream/60 hover:text-gold transition-colors duration-300"
+              className="font-body text-xs tracking-[0.15em] uppercase text-cream/60 hover:text-water transition-colors duration-300"
             >
               {link}
             </a>
           ))}
           <a
             href="#contact"
-            className="ml-4 px-5 py-2 border border-gold/50 text-gold text-xs tracking-[0.15em] uppercase hover:bg-gold hover:text-ink transition-all duration-300 rounded-sm"
+            className="ml-4 px-5 py-2 border border-water/40 text-water text-xs tracking-[0.15em] uppercase hover:bg-water hover:text-ink transition-all duration-300 rounded-sm"
           >
             Discover Kangen
           </a>
         </div>
 
-        {/* Mobile menu button */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           className="md:hidden text-cream"
@@ -56,10 +54,8 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Gold bottom border */}
-      <div className="h-px bg-gold/10" />
+      <div className="h-px bg-gradient-to-r from-transparent via-water/15 to-transparent" />
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -74,7 +70,7 @@ export default function Navbar() {
                   key={link}
                   href={`#${link.toLowerCase().replace(/\s/g, "-")}`}
                   onClick={() => setMobileOpen(false)}
-                  className="font-body text-xs tracking-[0.15em] uppercase text-cream/60 hover:text-gold transition-colors"
+                  className="font-body text-xs tracking-[0.15em] uppercase text-cream/60 hover:text-water transition-colors"
                 >
                   {link}
                 </a>
@@ -82,7 +78,7 @@ export default function Navbar() {
               <a
                 href="#contact"
                 onClick={() => setMobileOpen(false)}
-                className="mt-2 px-5 py-2 border border-gold/50 text-gold text-xs tracking-[0.15em] uppercase text-center hover:bg-gold hover:text-ink transition-all duration-300 rounded-sm"
+                className="mt-2 px-5 py-2 border border-water/40 text-water text-xs tracking-[0.15em] uppercase text-center hover:bg-water hover:text-ink transition-all duration-300 rounded-sm"
               >
                 Discover Kangen
               </a>

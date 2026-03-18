@@ -7,6 +7,9 @@ interface Particle {
   vy: number;
   size: number;
   alpha: number;
+  color: string;
+  pulseSpeed: number;
+  pulsePhase: number;
 }
 
 interface Ripple {
@@ -15,9 +18,10 @@ interface Ripple {
   radius: number;
   alpha: number;
   maxRadius: number;
+  color: string;
 }
 
-export function useRippleCanvas(color: string = "rgba(201, 168, 76, 0.1)") {
+export function useRippleCanvas(variant: "hero" | "cta" = "hero") {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -30,6 +34,7 @@ export function useRippleCanvas(color: string = "rgba(201, 168, 76, 0.1)") {
     let mouse = { x: -1000, y: -1000 };
     const particles: Particle[] = [];
     const ripples: Ripple[] = [];
+    let time = 0;
 
     const resize = () => {
       canvas.width = canvas.offsetWidth * window.devicePixelRatio;
@@ -39,67 +44,114 @@ export function useRippleCanvas(color: string = "rgba(201, 168, 76, 0.1)") {
     resize();
     window.addEventListener("resize", resize);
 
-    // Init particles
     const w = canvas.offsetWidth;
     const h = canvas.offsetHeight;
-    for (let i = 0; i < 60; i++) {
+
+    const goldColor = "201, 168, 76";
+    const waterColor = "123, 184, 204";
+    const waterLightColor = "168, 212, 228";
+
+    // More particles with mixed colors
+    const particleCount = variant === "hero" ? 90 : 70;
+    for (let i = 0; i < particleCount; i++) {
+      const isBlue = Math.random() > 0.4; // 60% blue particles
       particles.push({
         x: Math.random() * w,
         y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        size: Math.random() * 2 + 0.5,
-        alpha: Math.random() * 0.5 + 0.1,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        size: Math.random() * 2.5 + 0.5,
+        alpha: Math.random() * 0.5 + 0.15,
+        color: isBlue
+          ? (Math.random() > 0.5 ? waterColor : waterLightColor)
+          : goldColor,
+        pulseSpeed: 0.01 + Math.random() * 0.02,
+        pulsePhase: Math.random() * Math.PI * 2,
       });
     }
 
-    // Spawn ripples periodically
     let rippleTimer = 0;
     const spawnRipple = (x: number, y: number) => {
-      ripples.push({ x, y, radius: 0, alpha: 0.3, maxRadius: 150 + Math.random() * 100 });
+      const isBlue = Math.random() > 0.35;
+      ripples.push({
+        x, y,
+        radius: 0,
+        alpha: 0.35,
+        maxRadius: 180 + Math.random() * 120,
+        color: isBlue ? waterColor : goldColor,
+      });
     };
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
       mouse = { x: e.clientX - rect.left, y: e.clientY - rect.top };
     };
+
+    const handleClick = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      // Spawn burst of ripples on click
+      for (let i = 0; i < 3; i++) {
+        setTimeout(() => {
+          spawnRipple(
+            e.clientX - rect.left + (Math.random() - 0.5) * 40,
+            e.clientY - rect.top + (Math.random() - 0.5) * 40
+          );
+        }, i * 100);
+      }
+    };
+
     canvas.addEventListener("mousemove", handleMouseMove);
+    canvas.addEventListener("click", handleClick);
 
     const draw = () => {
       const cw = canvas.offsetWidth;
       const ch = canvas.offsetHeight;
       ctx.clearRect(0, 0, cw, ch);
+      time++;
 
-      // Ripples
+      // Ripples - spawn more frequently
       rippleTimer++;
-      if (rippleTimer % 120 === 0) {
+      if (rippleTimer % 70 === 0) {
         spawnRipple(Math.random() * cw, Math.random() * ch);
+      }
+
+      // Mouse-following ripple
+      if (rippleTimer % 40 === 0 && mouse.x > 0) {
+        spawnRipple(mouse.x + (Math.random() - 0.5) * 80, mouse.y + (Math.random() - 0.5) * 80);
       }
 
       for (let i = ripples.length - 1; i >= 0; i--) {
         const r = ripples[i];
-        r.radius += 0.5;
-        r.alpha -= 0.001;
+        r.radius += 0.8;
+        r.alpha -= 0.0015;
         if (r.alpha <= 0 || r.radius > r.maxRadius) {
           ripples.splice(i, 1);
           continue;
         }
         ctx.beginPath();
         ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
-        ctx.strokeStyle = color.replace(/[\d.]+\)$/, `${r.alpha})`);
+        ctx.strokeStyle = `rgba(${r.color}, ${r.alpha})`;
         ctx.lineWidth = 1;
         ctx.stroke();
+
+        // Second inner ring
+        if (r.radius > 20) {
+          ctx.beginPath();
+          ctx.arc(r.x, r.y, r.radius * 0.6, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(${r.color}, ${r.alpha * 0.4})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
       }
 
-      // Particles
+      // Particles with pulsing
       for (const p of particles) {
-        // Mouse repulsion
         const dx = p.x - mouse.x;
         const dy = p.y - mouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 100) {
-          p.vx += dx * 0.001;
-          p.vy += dy * 0.001;
+        if (dist < 120) {
+          p.vx += dx * 0.0015;
+          p.vy += dy * 0.0015;
         }
 
         p.x += p.vx;
@@ -112,10 +164,39 @@ export function useRippleCanvas(color: string = "rgba(201, 168, 76, 0.1)") {
         if (p.y < 0) p.y = ch;
         if (p.y > ch) p.y = 0;
 
+        // Pulse alpha
+        const pulseAlpha = p.alpha * (0.6 + 0.4 * Math.sin(time * p.pulseSpeed + p.pulsePhase));
+
+        // Glow effect for larger particles
+        if (p.size > 1.5) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${p.color}, ${pulseAlpha * 0.1})`;
+          ctx.fill();
+        }
+
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(201, 168, 76, ${p.alpha})`;
+        ctx.fillStyle = `rgba(${p.color}, ${pulseAlpha})`;
         ctx.fill();
+      }
+
+      // Draw connecting lines between nearby particles
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            const alpha = (1 - dist / 100) * 0.06;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(${waterColor}, ${alpha})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
       }
 
       animId = requestAnimationFrame(draw);
@@ -126,8 +207,9 @@ export function useRippleCanvas(color: string = "rgba(201, 168, 76, 0.1)") {
       cancelAnimationFrame(animId);
       window.removeEventListener("resize", resize);
       canvas.removeEventListener("mousemove", handleMouseMove);
+      canvas.removeEventListener("click", handleClick);
     };
-  }, [color]);
+  }, [variant]);
 
   return canvasRef;
 }
