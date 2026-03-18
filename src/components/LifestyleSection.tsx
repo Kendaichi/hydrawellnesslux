@@ -23,7 +23,8 @@ export default function LifestyleSection() {
   const [activeTab, setActiveTab] = useState<TabKey>("For You");
 
   return (
-    <section id="lifestyle" className="section-padding bg-ink">
+    <section id="lifestyle" className="section-padding bg-ink relative overflow-hidden">
+      <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full bg-water/[0.025] blur-[130px] pointer-events-none" />
       <div className="max-w-7xl mx-auto">
         <ScrollReveal>
           <p className="eyebrow mb-4 text-center">Lifestyle</p>
@@ -40,7 +41,7 @@ export default function LifestyleSection() {
               onClick={() => setActiveTab(tab)}
               className={`font-body text-xs tracking-[0.15em] uppercase pb-2 border-b-2 transition-all duration-300 ${
                 activeTab === tab
-                  ? "text-gold border-gold"
+                  ? "text-water border-water"
                   : "text-cream/40 border-transparent hover:text-cream/60"
               }`}
             >
@@ -57,14 +58,14 @@ export default function LifestyleSection() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="grid md:grid-cols-2 lg:grid-cols-4 border border-gold/10"
+            className="grid md:grid-cols-2 lg:grid-cols-4 border border-water/10"
           >
             {tabs[activeTab].map((card, i) => (
               <div
                 key={card.title}
-                className={`p-8 md:p-10 group hover:bg-ink-surface/30 transition-colors duration-300 ${
-                  i < tabs[activeTab].length - 1 ? "lg:border-r border-gold/10" : ""
-                } ${i < 2 ? "md:border-b lg:border-b-0 border-gold/10" : ""}`}
+                className={`p-8 md:p-10 group hover:bg-water/[0.03] transition-colors duration-300 ${
+                  i < tabs[activeTab].length - 1 ? "lg:border-r border-water/10" : ""
+                } ${i < 2 ? "md:border-b lg:border-b-0 border-water/10" : ""}`}
               >
                 <p className="font-body text-[10px] tracking-[0.2em] uppercase text-water mb-6">
                   {card.label}
