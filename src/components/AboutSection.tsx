@@ -14,7 +14,7 @@ export default function AboutSection() {
             <div className="border border-water/15 p-8 md:p-12">
               <div className="border border-water/10 p-8 md:p-12 relative min-h-[300px] flex items-center justify-center">
                 {/* Giant faint monogram */}
-                <span className="font-display text-[120px] md:text-[180px] font-light text-gold/[0.04] select-none leading-none">
+                <span className="font-display text-[120px] md:text-[180px] font-light text-water/[0.06] select-none leading-none">
                   HWL
                 </span>
               </div>
