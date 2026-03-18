@@ -4,7 +4,8 @@ const values = ["Purity & Quality", "Wellness-Focused", "Premium Lifestyle", "Su
 
 export default function AboutSection() {
   return (
-    <section id="about" className="section-padding bg-ink">
+    <section id="about" className="section-padding bg-ink relative overflow-hidden">
+      <div className="absolute top-1/3 right-0 w-[350px] h-[350px] rounded-full bg-water/[0.02] blur-[120px] pointer-events-none" />
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 md:gap-20 items-start">
         {/* Left: decorative */}
         <ScrollReveal>
