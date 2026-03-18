@@ -35,9 +35,9 @@ export default function AboutSection() {
         {/* Right: content */}
         <ScrollReveal delay={0.15}>
           <div>
-            <p className="eyebrow mb-4">Our Story</p>
+            <p className="eyebrow mb-4 text-water">Our Story</p>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-cream tracking-tight text-balance mb-8">
-              More Than Water.
+              More Than <span className="text-water-light">Water.</span>
               <br />A Way of Life.
             </h2>
             <p className="font-body text-sm font-light text-cream/60 leading-relaxed mb-6">

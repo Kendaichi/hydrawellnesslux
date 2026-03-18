@@ -63,9 +63,9 @@ export default function LifestyleSection() {
             {tabs[activeTab].map((card, i) => (
               <div
                 key={card.title}
-                className={`p-8 md:p-10 group hover:bg-ink-surface/30 transition-colors duration-300 ${
-                  i < tabs[activeTab].length - 1 ? "lg:border-r border-gold/10" : ""
-                } ${i < 2 ? "md:border-b lg:border-b-0 border-gold/10" : ""}`}
+                className={`p-8 md:p-10 group hover:bg-water/[0.03] transition-colors duration-300 ${
+                  i < tabs[activeTab].length - 1 ? "lg:border-r border-water/10" : ""
+                } ${i < 2 ? "md:border-b lg:border-b-0 border-water/10" : ""}`}
               >
                 <p className="font-body text-[10px] tracking-[0.2em] uppercase text-water mb-6">
                   {card.label}
