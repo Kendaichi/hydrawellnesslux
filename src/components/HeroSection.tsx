@@ -10,7 +10,10 @@ export default function HeroSection() {
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full"
-        style={{ background: "radial-gradient(ellipse at 30% 50%, #0f1a24 0%, #0D0A07 50%, #0D0A07 100%)" }}
+        style={{
+          background:
+            "radial-gradient(ellipse at 30% 50%, #0f1a24 0%, #0D0A07 50%, #0D0A07 100%)",
+        }}
       />
 
       {/* Animated ambient glows */}
@@ -22,7 +25,12 @@ export default function HeroSection() {
         />
         <motion.div
           animate={{ scale: [1, 1.1, 1], opacity: [0.02, 0.04, 0.02] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 3,
+          }}
           className="absolute bottom-1/3 left-1/5 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] rounded-full bg-water-light blur-[100px]"
         />
       </div>
@@ -47,10 +55,10 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="font-display font-light text-5xl sm:text-6xl md:text-8xl lg:text-9xl tracking-tight text-cream text-balance"
         >
-          Hydration,
+          Feel Better, Live Lighter,
           <br />
           <span className="italic bg-gradient-to-r from-water via-gold to-water-light bg-clip-text text-transparent">
-            Elevated.
+            Hydrate Differently.
           </span>
         </motion.h1>
 
@@ -69,7 +77,8 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 1 }}
           className="font-body text-[10px] tracking-[0.2em] uppercase text-water/60 mb-8 sm:mb-10"
         >
-          Wellness in Every Drop
+          This isn't just water - it's a daily wellness upgrade designed to
+          support your energy, lifestyle, and overall well-being.
         </motion.p>
 
         <motion.div
@@ -82,7 +91,7 @@ export default function HeroSection() {
             href="#contact"
             className="group relative w-full sm:w-auto px-8 py-3.5 sm:py-3 font-body text-xs tracking-[0.15em] uppercase overflow-hidden rounded-sm transition-all duration-300 bg-gradient-to-r from-water to-gold text-ink hover:shadow-[0_0_30px_rgba(123,184,204,0.3)] text-center"
           >
-            <span className="relative z-10">Experience HydraWellnessLux</span>
+            <span className="relative z-10">Start Your Wellness Journey</span>
           </a>
           <a
             href="#the-water"
@@ -95,8 +104,15 @@ export default function HeroSection() {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
-        <span className="font-body text-[9px] tracking-[0.3em] uppercase text-water/30">Scroll</span>
-        <div className="w-px animate-scroll-line" style={{ background: "linear-gradient(to bottom, #7BB8CC, transparent)" }} />
+        <span className="font-body text-[9px] tracking-[0.3em] uppercase text-water/30">
+          Scroll
+        </span>
+        <div
+          className="w-px animate-scroll-line"
+          style={{
+            background: "linear-gradient(to bottom, #7BB8CC, transparent)",
+          }}
+        />
       </div>
     </section>
   );

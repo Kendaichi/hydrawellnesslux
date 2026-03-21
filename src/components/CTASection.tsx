@@ -10,7 +10,10 @@ export default function CTASection() {
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full"
-        style={{ background: "linear-gradient(135deg, #0f1a24 0%, #493423 50%, #0f1a24 100%)" }}
+        style={{
+          background:
+            "linear-gradient(135deg, #0f1a24 0%, #493423 50%, #0f1a24 100%)",
+        }}
       />
       {/* Animated ambient glow */}
       <div className="absolute inset-0 pointer-events-none">
@@ -31,24 +34,32 @@ export default function CTASection() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-light text-cream tracking-tight text-balance mb-6"
           >
-            Experience <span className="bg-gradient-to-r from-water to-gold bg-clip-text text-transparent">HydraWellnessLux</span> Today
+            Ready to{" "}
+            <span className="bg-gradient-to-r from-water to-gold bg-clip-text text-transparent">
+              Feel the Difference
+            </span>{" "}
+            Today?
           </motion.h2>
           <p className="font-body text-sm font-light text-cream/50 mb-8 sm:mb-10">
-            Book a consultation · Request a demo · Begin your journey
+            If you've made it this far, something about this probably resonates
+            with you.
+            <br />
+            This is your chance to explore a simpler. more elevated approach to
+            wellness.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
             <a
               href="#contact"
               className="w-full sm:w-auto px-8 py-3.5 sm:py-3 font-body text-xs tracking-[0.15em] uppercase transition-all duration-300 rounded-sm bg-gradient-to-r from-water to-gold text-ink hover:shadow-[0_0_30px_rgba(123,184,204,0.3)] text-center"
             >
-              Book a Consultation
+              Get Started
             </a>
-            <a
+            {/* <a
               href="#lifestyle"
               className="w-full sm:w-auto px-8 py-3.5 sm:py-3 border border-water/25 text-water/80 font-body text-xs tracking-[0.15em] uppercase hover:border-water hover:text-water hover:shadow-[0_0_20px_rgba(123,184,204,0.15)] transition-all duration-300 rounded-sm text-center"
             >
               For Restaurants & Cafés
-            </a>
+            </a> */}
           </div>
         </ScrollReveal>
       </div>

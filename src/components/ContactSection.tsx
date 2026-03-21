@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
 
 const contactInfo = [
-  { icon: Mail, label: "Email", value: "hello@hydrawellnesslux.com" },
+  { icon: Mail, label: "Email", value: "kiona@hydraluxwellnesskbl.com" },
   { icon: Phone, label: "Phone", value: "+1 (800) HWL-PURE" },
   { icon: AtSign, label: "Social", value: "@hydrawellnesslux" },
 ];
@@ -15,18 +15,48 @@ const infoContainer = {
 };
 const infoItem = {
   hidden: { opacity: 0, x: 20 },
-  show: { opacity: 1, x: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.55,
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+    },
+  },
 };
 
 export default function ContactSection() {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+    await fetch(import.meta.env.VITE_GOOGLE_SHEET_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        form_type: "contact",
+        sheet_name: "hydrawellnesslux",
+        ...formData,
+      }),
+    });
+    setLoading(false);
+    setSubmitted(true);
+    setFormData({ name: "", email: "", message: "" });
   };
 
   return (
-    <section id="contact" className="section-padding relative overflow-hidden bg-ink">
+    <section
+      id="contact"
+      className="section-padding relative overflow-hidden bg-ink"
+    >
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-water/[0.03] blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10 grid md:grid-cols-2 gap-12 md:gap-20">
@@ -36,30 +66,35 @@ export default function ContactSection() {
             <p className="eyebrow mb-4 text-water">Connect</p>
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-light text-cream tracking-tight mb-10 sm:mb-12">
               Let's Begin Your
-              <br /><span className="text-water-light italic">Wellness Journey</span>
+              <br />
+              <span className="text-water-light italic">Wellness Journey</span>
             </h2>
 
             <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
               {(["name", "email", "message"] as const).map((field) => (
-                <motion.div
-                  key={field}
-                  whileFocusWithin={{ scale: 1.01 }}
-                  transition={{ duration: 0.2 }}
-                >
+                <motion.div key={field}>
                   {field === "message" ? (
                     <textarea
-                      placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+                      placeholder={
+                        field.charAt(0).toUpperCase() + field.slice(1)
+                      }
                       rows={3}
                       value={formData[field]}
-                      onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, [field]: e.target.value })
+                      }
                       className="w-full bg-transparent border-b border-cream/20 py-4 font-body text-sm text-cream placeholder:text-cream/30 focus:border-water transition-colors duration-300 outline-none resize-none"
                     />
                   ) : (
                     <input
                       type={field === "email" ? "email" : "text"}
-                      placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+                      placeholder={
+                        field.charAt(0).toUpperCase() + field.slice(1)
+                      }
                       value={formData[field]}
-                      onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, [field]: e.target.value })
+                      }
                       className="w-full bg-transparent border-b border-cream/20 py-4 font-body text-sm text-cream placeholder:text-cream/30 focus:border-water transition-colors duration-300 outline-none"
                     />
                   )}
@@ -70,9 +105,10 @@ export default function ContactSection() {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ duration: 0.2 }}
-                className="px-8 py-3 font-body text-xs tracking-[0.15em] uppercase rounded-sm transition-all duration-300 bg-gradient-to-r from-water to-gold text-ink hover:shadow-[0_0_25px_rgba(123,184,204,0.3)]"
+                disabled={loading || submitted}
+                className="px-8 py-3 font-body text-xs tracking-[0.15em] uppercase rounded-sm transition-all duration-300 bg-gradient-to-r from-water to-gold text-ink hover:shadow-[0_0_25px_rgba(123,184,204,0.3)] disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                Send
+                {loading ? "Sending..." : submitted ? "Sent" : "Send"}
               </motion.button>
             </form>
           </div>
@@ -87,7 +123,11 @@ export default function ContactSection() {
           viewport={{ once: true, margin: "-40px" }}
         >
           {contactInfo.map((item) => (
-            <motion.div key={item.label} variants={infoItem} className="flex items-start gap-4">
+            <motion.div
+              key={item.label}
+              variants={infoItem}
+              className="flex items-start gap-4"
+            >
               <div className="w-10 h-10 border border-water/25 flex items-center justify-center flex-shrink-0">
                 <item.icon size={16} className="text-water" />
               </div>
