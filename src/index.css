@@ -4,36 +4,74 @@
 
 @layer base {
   :root {
-    --background: 20 30% 3%;
-    --foreground: 38 30% 91%;
-    --card: 20 25% 6%;
-    --card-foreground: 38 30% 91%;
-    --popover: 20 25% 6%;
-    --popover-foreground: 38 30% 91%;
+    /* Semantic color tokens — flip in .dark */
+    --color-parchment:      60 56% 91%;   /* #F5F5DC cream */
+    --color-parchment-deep: 38 30% 90%;   /* #F0EBE0 */
+    --color-surface:        48 60% 99%;   /* near-white warm card bg */
+    --color-ink:            27 35% 21%;   /* #493423 brown */
+    --color-ink-light:      27 25% 35%;
+    --color-ink-surface:    27 20% 42%;
+
+    /* Shadcn tokens */
+    --background: 60 56% 91%;
+    --foreground: 27 35% 21%;
+    --card: 48 60% 99%;
+    --card-foreground: 27 35% 21%;
+    --popover: 48 60% 99%;
+    --popover-foreground: 27 35% 21%;
     --primary: 43 50% 54%;
-    --primary-foreground: 20 30% 3%;
-    --secondary: 20 20% 10%;
-    --secondary-foreground: 38 30% 91%;
-    --muted: 20 15% 12%;
-    --muted-foreground: 38 15% 55%;
-    --accent: 195 40% 63%;
-    --accent-foreground: 20 30% 3%;
+    --primary-foreground: 27 35% 21%;
+    --secondary: 38 30% 90%;
+    --secondary-foreground: 27 35% 21%;
+    --muted: 38 30% 90%;
+    --muted-foreground: 27 20% 45%;
+    --accent: 192 40% 50%;
+    --accent-foreground: 27 35% 21%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 38 30% 91%;
-    --border: 43 50% 54% / 0.15;
-    --input: 43 50% 54% / 0.2;
-    --ring: 43 50% 54%;
-    --radius: 2px;
+    --border: 40 25% 82%;
+    --input: 40 25% 82%;
+    --ring: 192 40% 50%;
+    --radius: 8px;
 
-    --sidebar-background: 20 30% 3%;
-    --sidebar-foreground: 38 30% 91%;
+    --sidebar-background: 60 56% 91%;
+    --sidebar-foreground: 27 35% 21%;
     --sidebar-primary: 43 50% 54%;
-    --sidebar-primary-foreground: 20 30% 3%;
-    --sidebar-accent: 20 20% 10%;
-    --sidebar-accent-foreground: 38 30% 91%;
-    --sidebar-border: 43 50% 54% / 0.15;
-    --sidebar-ring: 43 50% 54%;
+    --sidebar-primary-foreground: 27 35% 21%;
+    --sidebar-accent: 38 30% 90%;
+    --sidebar-accent-foreground: 27 35% 21%;
+    --sidebar-border: 40 25% 82%;
+    --sidebar-ring: 192 40% 50%;
   }
+}
+
+.dark {
+  --color-parchment:      21 62% 7%;    /* #1E0F07 very dark warm brown */
+  --color-parchment-deep: 24 52% 11%;   /* #2C1A0E slightly lighter */
+  --color-surface:        25 45% 14%;   /* #321A0C dark card surface */
+  --color-ink:            60 56% 91%;   /* #F5F5DC cream — now used as text */
+  --color-ink-light:      38 30% 80%;
+  --color-ink-surface:    38 20% 65%;
+
+  --background: 21 62% 7%;
+  --foreground: 60 56% 91%;
+  --card: 25 45% 14%;
+  --card-foreground: 60 56% 91%;
+  --popover: 25 45% 14%;
+  --popover-foreground: 60 56% 91%;
+  --primary: 43 50% 54%;
+  --primary-foreground: 27 35% 21%;
+  --secondary: 24 52% 11%;
+  --secondary-foreground: 60 56% 91%;
+  --muted: 24 52% 11%;
+  --muted-foreground: 38 20% 65%;
+  --accent: 192 40% 50%;
+  --accent-foreground: 60 56% 91%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 60 56% 91%;
+  --border: 25 30% 22%;
+  --input: 25 30% 22%;
+  --ring: 192 40% 50%;
 }
 
 @layer base {
@@ -45,7 +83,7 @@
     cursor: none;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display font-light;
+    @apply font-display;
   }
 }
 
@@ -90,8 +128,11 @@
   width: 4px;
 }
 ::-webkit-scrollbar-track {
-  background: #0D0A07;
+  background: #F5F5DC;
 }
 ::-webkit-scrollbar-thumb {
-  background: #C9A84C33;
+  background: #C9A84C55;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #1E0F07;
 }

@@ -55,19 +55,19 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="section-padding relative overflow-hidden bg-ink"
+      className="section-padding relative overflow-hidden bg-parchment"
     >
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-water/[0.03] blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-gold/[0.05] blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10 grid md:grid-cols-2 gap-12 md:gap-20">
         {/* Left: form */}
         <ScrollReveal>
           <div>
             <p className="eyebrow mb-4 text-water">Connect</p>
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-light text-cream tracking-tight mb-10 sm:mb-12">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-light text-ink tracking-tight mb-10 sm:mb-12">
               Let's Begin Your
               <br />
-              <span className="text-water-light italic">Wellness Journey</span>
+              <span className="text-water italic">Wellness Journey</span>
             </h2>
 
             <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
@@ -83,7 +83,7 @@ export default function ContactSection() {
                       onChange={(e) =>
                         setFormData({ ...formData, [field]: e.target.value })
                       }
-                      className="w-full bg-transparent border-b border-cream/20 py-4 font-body text-sm text-cream placeholder:text-cream/30 focus:border-water transition-colors duration-300 outline-none resize-none"
+                      className="w-full bg-transparent border-b border-ink/20 py-4 font-body text-sm text-ink placeholder:text-ink/35 focus:border-water transition-colors duration-300 outline-none resize-none"
                     />
                   ) : (
                     <input
@@ -95,7 +95,7 @@ export default function ContactSection() {
                       onChange={(e) =>
                         setFormData({ ...formData, [field]: e.target.value })
                       }
-                      className="w-full bg-transparent border-b border-cream/20 py-4 font-body text-sm text-cream placeholder:text-cream/30 focus:border-water transition-colors duration-300 outline-none"
+                      className="w-full bg-transparent border-b border-ink/20 py-4 font-body text-sm text-ink placeholder:text-ink/35 focus:border-water transition-colors duration-300 outline-none"
                     />
                   )}
                 </motion.div>
@@ -106,7 +106,7 @@ export default function ContactSection() {
                 whileTap={{ scale: 0.97 }}
                 transition={{ duration: 0.2 }}
                 disabled={loading || submitted}
-                className="px-8 py-3 font-body text-xs tracking-[0.15em] uppercase rounded-sm transition-all duration-300 bg-gradient-to-r from-water to-gold text-ink hover:shadow-[0_0_25px_rgba(123,184,204,0.3)] disabled:opacity-60 disabled:cursor-not-allowed"
+                className="px-8 py-3 font-body text-xs tracking-[0.15em] uppercase rounded-lg transition-all duration-300 bg-gradient-to-r from-water to-gold text-white hover:shadow-[0_8px_30px_rgba(123,169,156,0.35)] disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {loading ? "Sending..." : submitted ? "Sent" : "Send"}
               </motion.button>
@@ -128,14 +128,14 @@ export default function ContactSection() {
               variants={infoItem}
               className="flex items-start gap-4"
             >
-              <div className="w-10 h-10 border border-water/25 flex items-center justify-center flex-shrink-0">
+              <div className="w-10 h-10 border border-water/30 rounded-xl flex items-center justify-center flex-shrink-0 bg-surface shadow-sm">
                 <item.icon size={16} className="text-water" />
               </div>
               <div>
-                <p className="font-body text-[10px] tracking-[0.15em] uppercase text-cream/40 mb-1">
+                <p className="font-body text-xs tracking-[0.1em] uppercase text-ink/60 mb-1">
                   {item.label}
                 </p>
-                <p className="font-body text-sm text-cream/70">{item.value}</p>
+                <p className="font-body text-sm text-ink/65">{item.value}</p>
               </div>
             </motion.div>
           ))}

@@ -28,39 +28,21 @@ const cardItem = {
   show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 };
 
-// Border classes for responsive grid dividers
-const getCardBorder = (i: number, total: number) => {
-  const isLast = i === total - 1;
-  const isTopRowMd = i < 2;
-  const isLeftColMd = i % 2 === 0;
-  return [
-    "border-water/10",
-    !isLast && "border-b",
-    isLeftColMd && !isLast && "md:border-r",
-    isTopRowMd && "md:border-b",
-    !isTopRowMd && !isLast && "md:border-b-0",
-    !isLast && "lg:border-r",
-    !isLast && "lg:border-b-0",
-  ]
-    .filter(Boolean)
-    .join(" ");
-};
-
 export default function LifestyleSection() {
   const [activeTab, setActiveTab] = useState<TabKey>("For You");
 
   return (
-    <section id="lifestyle" className="section-padding bg-ink relative overflow-hidden">
-      <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full bg-water/[0.025] blur-[130px] pointer-events-none" />
+    <section id="lifestyle" className="section-padding bg-parchment relative overflow-hidden">
+      <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full bg-water/[0.06] blur-[130px] pointer-events-none" />
       <div className="max-w-7xl mx-auto">
         <ScrollReveal>
-          <p className="eyebrow mb-4 text-center">Lifestyle</p>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-cream tracking-tight text-center text-balance mb-10 sm:mb-12">
+          <p className="eyebrow mb-4 text-center text-water">Lifestyle</p>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-ink tracking-tight text-center text-balance mb-10 sm:mb-12">
             Integrated Into Your World
           </h2>
         </ScrollReveal>
 
-        {/* Tabs — flex-wrap prevents overflow on small screens */}
+        {/* Tabs */}
         <div className="flex flex-wrap justify-center gap-4 sm:gap-8 mb-10 sm:mb-12">
           {(Object.keys(tabs) as TabKey[]).map((tab) => (
             <button
@@ -69,7 +51,7 @@ export default function LifestyleSection() {
               className={`font-body text-xs tracking-[0.15em] uppercase pb-2 border-b-2 transition-all duration-300 whitespace-nowrap ${
                 activeTab === tab
                   ? "text-water border-water"
-                  : "text-cream/40 border-transparent hover:text-cream/60"
+                  : "text-ink/40 border-transparent hover:text-ink/60"
               }`}
             >
               {tab}
@@ -85,21 +67,21 @@ export default function LifestyleSection() {
             initial="hidden"
             animate="show"
             exit={{ opacity: 0, y: -8, transition: { duration: 0.2 } }}
-            className="grid md:grid-cols-2 lg:grid-cols-4 border border-water/10"
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5"
           >
-            {tabs[activeTab].map((card, i) => (
+            {tabs[activeTab].map((card) => (
               <motion.div
                 key={card.title}
                 variants={cardItem}
-                className={`p-6 sm:p-8 md:p-10 group hover:bg-water/[0.03] transition-colors duration-300 ${getCardBorder(i, tabs[activeTab].length)}`}
+                className="bg-surface rounded-2xl p-6 sm:p-8 shadow-sm border border-sand/20 dark:border-cream/10 hover:shadow-md hover:border-water/30 transition-all duration-300 group"
               >
                 <p className="font-body text-[10px] tracking-[0.2em] uppercase text-water mb-5 sm:mb-6">
                   {card.label}
                 </p>
-                <h3 className="font-display text-xl md:text-2xl font-light text-cream tracking-tight mb-4">
+                <h3 className="font-display text-xl md:text-2xl font-light text-ink tracking-tight mb-4">
                   {card.title}
                 </h3>
-                <p className="font-body text-xs font-light text-cream/50 leading-relaxed">
+                <p className="font-body text-xs text-ink/70 leading-relaxed">
                   {card.body}
                 </p>
               </motion.div>

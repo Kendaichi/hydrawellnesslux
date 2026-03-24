@@ -13,10 +13,10 @@ const items = [
 export default function MarqueeStrip() {
   const content = items.map((item, i) => (
     <span key={i} className="flex items-center gap-6 mx-6">
-      <span className="font-body text-xs tracking-[0.2em] uppercase text-cream/60 whitespace-nowrap">
+      <span className="font-body text-xs tracking-[0.15em] uppercase text-ink/60 whitespace-nowrap">
         {item}
       </span>
-      <span className="w-1.5 h-1.5 rounded-full bg-water/50 flex-shrink-0 shadow-[0_0_6px_rgba(123,184,204,0.4)]" />
+      <span className="w-1.5 h-1.5 rounded-full bg-water/50 flex-shrink-0" />
     </span>
   ));
 
@@ -26,8 +26,7 @@ export default function MarqueeStrip() {
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="relative py-5 overflow-hidden border-y border-water/10"
-      style={{ background: "linear-gradient(90deg, #0f1a24, #1a1410, #0f1a24)" }}
+      className="relative py-5 overflow-hidden border-y border-sand/20 bg-parchment-deep"
     >
       <div className="flex animate-marquee">
         <div className="flex">{content}</div>

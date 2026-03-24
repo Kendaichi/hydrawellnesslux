@@ -47,23 +47,23 @@ export function useRippleCanvas(variant: "hero" | "cta" = "hero") {
     const w = canvas.offsetWidth;
     const h = canvas.offsetHeight;
 
-    const goldColor = "201, 168, 76";
-    const waterColor = "123, 184, 204";
-    const waterLightColor = "168, 212, 228";
+    // Warm teal + gold palette — visible on cream #F5F5DC background
+    const sageColor = "78, 159, 179";       // #4E9FB3 warm teal
+    const sageLightColor = "123, 191, 200"; // #7BBFC8 teal light
+    const goldColor = "160, 120, 40";
 
-    // More particles with mixed colors
-    const particleCount = variant === "hero" ? 90 : 70;
+    const particleCount = variant === "hero" ? 70 : 50;
     for (let i = 0; i < particleCount; i++) {
-      const isBlue = Math.random() > 0.4; // 60% blue particles
+      const isSage = Math.random() > 0.35;
       particles.push({
         x: Math.random() * w,
         y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        size: Math.random() * 2.8 + 0.7,
-        alpha: Math.random() * 0.5 + 0.22,
-        color: isBlue
-          ? (Math.random() > 0.5 ? waterColor : waterLightColor)
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        size: Math.random() * 2.2 + 0.5,
+        alpha: Math.random() * 0.35 + 0.15,
+        color: isSage
+          ? (Math.random() > 0.5 ? sageColor : sageLightColor)
           : goldColor,
         pulseSpeed: 0.01 + Math.random() * 0.02,
         pulsePhase: Math.random() * Math.PI * 2,
@@ -72,13 +72,13 @@ export function useRippleCanvas(variant: "hero" | "cta" = "hero") {
 
     let rippleTimer = 0;
     const spawnRipple = (x: number, y: number) => {
-      const isBlue = Math.random() > 0.35;
+      const isSage = Math.random() > 0.4;
       ripples.push({
         x, y,
         radius: 0,
-        alpha: 0.35,
-        maxRadius: 180 + Math.random() * 120,
-        color: isBlue ? waterColor : goldColor,
+        alpha: 0.25,
+        maxRadius: 160 + Math.random() * 100,
+        color: isSage ? sageColor : goldColor,
       });
     };
 
@@ -89,7 +89,6 @@ export function useRippleCanvas(variant: "hero" | "cta" = "hero") {
 
     const handleClick = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
-      // Spawn burst of ripples on click
       for (let i = 0; i < 3; i++) {
         setTimeout(() => {
           spawnRipple(
@@ -109,21 +108,19 @@ export function useRippleCanvas(variant: "hero" | "cta" = "hero") {
       ctx.clearRect(0, 0, cw, ch);
       time++;
 
-      // Ripples - spawn more frequently
+      // Ripples
       rippleTimer++;
-      if (rippleTimer % 70 === 0) {
+      if (rippleTimer % 80 === 0) {
         spawnRipple(Math.random() * cw, Math.random() * ch);
       }
-
-      // Mouse-following ripple
-      if (rippleTimer % 40 === 0 && mouse.x > 0) {
+      if (rippleTimer % 50 === 0 && mouse.x > 0) {
         spawnRipple(mouse.x + (Math.random() - 0.5) * 80, mouse.y + (Math.random() - 0.5) * 80);
       }
 
       for (let i = ripples.length - 1; i >= 0; i--) {
         const r = ripples[i];
-        r.radius += 0.8;
-        r.alpha -= 0.0015;
+        r.radius += 0.7;
+        r.alpha -= 0.0012;
         if (r.alpha <= 0 || r.radius > r.maxRadius) {
           ripples.splice(i, 1);
           continue;
@@ -134,17 +131,16 @@ export function useRippleCanvas(variant: "hero" | "cta" = "hero") {
         ctx.lineWidth = 1;
         ctx.stroke();
 
-        // Second inner ring
         if (r.radius > 20) {
           ctx.beginPath();
           ctx.arc(r.x, r.y, r.radius * 0.6, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(${r.color}, ${r.alpha * 0.4})`;
+          ctx.strokeStyle = `rgba(${r.color}, ${r.alpha * 0.35})`;
           ctx.lineWidth = 0.5;
           ctx.stroke();
         }
       }
 
-      // Particles with pulsing
+      // Particles
       for (const p of particles) {
         const dx = p.x - mouse.x;
         const dy = p.y - mouse.y;
@@ -164,14 +160,12 @@ export function useRippleCanvas(variant: "hero" | "cta" = "hero") {
         if (p.y < 0) p.y = ch;
         if (p.y > ch) p.y = 0;
 
-        // Pulse alpha
         const pulseAlpha = p.alpha * (0.65 + 0.35 * Math.sin(time * p.pulseSpeed + p.pulsePhase));
 
-        // Glow effect for larger particles
         if (p.size > 1.5) {
           ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size * 3.5, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${p.color}, ${pulseAlpha * 0.13})`;
+          ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${p.color}, ${pulseAlpha * 0.1})`;
           ctx.fill();
         }
 
@@ -179,24 +173,6 @@ export function useRippleCanvas(variant: "hero" | "cta" = "hero") {
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${p.color}, ${pulseAlpha})`;
         ctx.fill();
-      }
-
-      // Draw connecting lines between nearby particles
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 100) {
-            const alpha = (1 - dist / 100) * 0.06;
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(${waterColor}, ${alpha})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
       }
 
       animId = requestAnimationFrame(draw);

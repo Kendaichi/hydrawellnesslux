@@ -14,18 +14,18 @@ const chipItem = {
 
 export default function AboutSection() {
   return (
-    <section id="about" className="section-padding bg-ink relative overflow-hidden">
-      <div className="absolute top-1/3 right-0 w-[350px] h-[350px] rounded-full bg-water/[0.02] blur-[120px] pointer-events-none" />
+    <section id="about" className="section-padding bg-parchment relative overflow-hidden">
+      <div className="absolute top-1/3 right-0 w-[350px] h-[350px] rounded-full bg-gold/[0.06] blur-[120px] pointer-events-none" />
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 md:gap-20 items-start">
         {/* Left: decorative */}
         <ScrollReveal>
           <div className="relative">
-            {/* Nested gold frames */}
-            <div className="border border-water/15 p-6 sm:p-8 md:p-12">
-              <div className="border border-water/10 p-6 sm:p-8 md:p-12 relative min-h-[220px] sm:min-h-[300px] flex items-center justify-center">
+            {/* Soft nested frames */}
+            <div className="border border-sand/30 dark:border-cream/10 p-6 sm:p-8 md:p-12 rounded-2xl">
+              <div className="border border-sand/20 dark:border-cream/[0.07] p-6 sm:p-8 md:p-12 relative min-h-[220px] sm:min-h-[300px] flex items-center justify-center rounded-xl">
                 {/* Giant faint monogram */}
                 <motion.span
-                  animate={{ opacity: [0.06, 0.09, 0.06] }}
+                  animate={{ opacity: [0.06, 0.1, 0.06] }}
                   transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                   className="font-display text-[80px] sm:text-[120px] md:text-[160px] font-light text-water select-none leading-none"
                 >
@@ -36,7 +36,7 @@ export default function AboutSection() {
 
             {/* Pull quote */}
             <div className="mt-8 sm:mt-10 border-l-2 border-water/40 pl-5 sm:pl-6">
-              <p className="font-display text-base sm:text-lg md:text-xl italic text-cream/80 leading-relaxed">
+              <p className="font-display text-base sm:text-lg md:text-xl italic text-ink/70 leading-relaxed">
                 "Elevating hydration, enhancing wellness, and creating a lifestyle that thrives."
               </p>
               <p className="mt-4 font-body text-xs tracking-[0.15em] uppercase text-gold">
@@ -50,23 +50,23 @@ export default function AboutSection() {
         <ScrollReveal delay={0.15}>
           <div>
             <p className="eyebrow mb-4 text-water">Our Story</p>
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-cream tracking-tight text-balance mb-8">
-              More Than <span className="text-water-light">Water.</span>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-ink tracking-tight text-balance mb-8">
+              More Than <span className="text-water">Water.</span>
               <br />A Way of Life.
             </h2>
-            <p className="font-body text-sm font-light text-cream/60 leading-relaxed mb-6">
+            <p className="font-body text-sm text-ink/70 leading-relaxed mb-6">
               HydraWellnessLux was born from a simple belief: that the water we drink should be as
               exceptional as the lives we lead. Through the advanced Kangen water ionization process,
               we deliver hydrogen-rich, alkaline water that supports your body, elevates your wellness
               routine, and complements a lifestyle of intention and refinement.
             </p>
-            <p className="font-body text-sm font-light text-cream/60 leading-relaxed mb-10">
+            <p className="font-body text-sm text-ink/70 leading-relaxed mb-10">
               From world-class athletes to Michelin-starred kitchens, our water has become the
               foundation of peak performance and culinary excellence. This is not just hydration —
               it is a commitment to living better, every single day.
             </p>
 
-            {/* Value chips — staggered entrance */}
+            {/* Value chips */}
             <motion.div
               className="flex flex-wrap gap-2 sm:gap-3"
               variants={chipContainer}
@@ -78,7 +78,7 @@ export default function AboutSection() {
                 <motion.span
                   key={v}
                   variants={chipItem}
-                  className="px-3 sm:px-4 py-2 border border-cream/15 text-cream/50 font-body text-[10px] tracking-[0.15em] uppercase rounded-sm hover:border-water hover:text-water transition-all duration-300 cursor-default"
+                  className="px-3 sm:px-4 py-2 border border-ink/20 text-ink/65 font-body text-xs tracking-[0.1em] uppercase rounded-lg hover:border-water hover:text-water transition-all duration-300 cursor-default"
                 >
                   {v}
                 </motion.span>

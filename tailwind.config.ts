@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['"Cormorant Garamond"', 'serif'],
+        display: ['"Libre Baskerville"', 'serif'],
         body: ['"Montserrat"', 'sans-serif'],
       },
       colors: {
@@ -51,21 +51,33 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Flips via CSS vars: brown in light, cream in dark
         ink: {
-          DEFAULT: "#0D0A07",
-          light: "#1A1410",
-          surface: "#241C15",
+          DEFAULT: "hsl(var(--color-ink))",
+          light: "hsl(var(--color-ink-light))",
+          surface: "hsl(var(--color-ink-surface))",
+        },
+        // Flips via CSS vars: cream in light, dark brown in dark
+        parchment: {
+          DEFAULT: "hsl(var(--color-parchment))",
+          deep: "hsl(var(--color-parchment-deep))",
+        },
+        // Card surface — near-white in light, dark brown in dark
+        surface: "hsl(var(--color-surface))",
+        // Warm teal — bridges earthy browns and fresh water
+        // Shifted from cold sky blue toward blue-green so it reads
+        // as natural spring water rather than clinical/pharma blue
+        water: {
+          DEFAULT: "#4E9FB3",
+          light: "#7BBFC8",
         },
         gold: {
           DEFAULT: "#C9A84C",
           bright: "#E8C96A",
         },
-        water: {
-          DEFAULT: "#7BB8CC",
-          light: "#A8D4E4",
-        },
         cream: "#F0EBE0",
         sand: "#C1A37F",
+        blush: "#D4A896",
         brown: {
           DEFAULT: "#493423",
           accent: "#493423",
@@ -83,8 +95,8 @@ export default {
       },
       borderRadius: {
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 1px)",
-        sm: "calc(var(--radius) - 1px)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
         "accordion-down": {
