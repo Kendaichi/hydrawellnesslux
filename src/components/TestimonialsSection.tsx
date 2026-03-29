@@ -30,8 +30,25 @@ const cardVariants = {
 
 export default function TestimonialsSection() {
   return (
-    <section id="testimonials" className="section-padding relative overflow-hidden bg-parchment-deep">
-      <div className="absolute top-1/2 right-0 w-[400px] h-[400px] rounded-full bg-gold/[0.06] blur-[120px] pointer-events-none" />
+    <section id="testimonials" className="section-padding relative overflow-hidden bg-section-d grain">
+      {/* Animated ambient orbs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div
+          animate={{ scale: [1, 1.25, 1], opacity: [0.05, 0.09, 0.05], x: [0, -40, 0], y: [0, 20, 0] }}
+          transition={{ duration: 17, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/2 right-0 w-[400px] h-[400px] rounded-full bg-gold blur-[120px]"
+        />
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.04, 0.08, 0.04], x: [0, 30, 0] }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay: 5 }}
+          className="absolute top-[10%] left-[5%] w-[300px] h-[300px] rounded-full bg-water blur-[110px]"
+        />
+        <motion.div
+          animate={{ scale: [1, 1.15, 1], opacity: [0.03, 0.06, 0.03], y: [0, -30, 0] }}
+          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 8 }}
+          className="absolute bottom-[10%] left-1/2 w-[250px] h-[250px] rounded-full bg-gold blur-[100px]"
+        />
+      </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         <ScrollReveal>
@@ -60,14 +77,14 @@ export default function TestimonialsSection() {
               {/* Large quote mark */}
               <span className="font-display text-6xl text-gold/20 leading-none select-none">"</span>
 
-              <p className="font-display text-base md:text-lg italic text-ink/65 leading-relaxed mt-2 mb-8">
+              <p className="font-display text-base md:text-lg italic text-ink/90 leading-relaxed mt-2 mb-8">
                 {t.quote}
               </p>
 
               <p className="font-body text-xs tracking-[0.15em] uppercase text-water">
                 {t.name}
               </p>
-              <p className="font-body text-xs text-ink/60 mt-1">
+              <p className="font-body text-xs text-ink/85 mt-1">
                 {t.role}
               </p>
             </motion.div>

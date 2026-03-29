@@ -24,7 +24,7 @@
     --secondary: 38 30% 90%;
     --secondary-foreground: 27 35% 21%;
     --muted: 38 30% 90%;
-    --muted-foreground: 27 20% 45%;
+    --muted-foreground: 27 25% 32%;
     --accent: 192 40% 50%;
     --accent-foreground: 27 35% 21%;
     --destructive: 0 84% 60%;
@@ -46,31 +46,31 @@
 }
 
 .dark {
-  --color-parchment:      21 62% 7%;    /* #1E0F07 very dark warm brown */
-  --color-parchment-deep: 24 52% 11%;   /* #2C1A0E slightly lighter */
-  --color-surface:        25 45% 14%;   /* #321A0C dark card surface */
-  --color-ink:            60 56% 91%;   /* #F5F5DC cream — now used as text */
-  --color-ink-light:      38 30% 80%;
-  --color-ink-surface:    38 20% 65%;
+  --color-parchment:      222 50% 8%;   /* #080F1F deep navy */
+  --color-parchment-deep: 220 46% 11%;  /* #0D1629 slightly lighter navy */
+  --color-surface:        218 42% 16%;  /* #172038 navy card surface */
+  --color-ink:            210 40% 94%;  /* #E8EFF8 cool white — text */
+  --color-ink-light:      214 30% 78%;
+  --color-ink-surface:    214 20% 62%;
 
-  --background: 21 62% 7%;
-  --foreground: 60 56% 91%;
-  --card: 25 45% 14%;
-  --card-foreground: 60 56% 91%;
-  --popover: 25 45% 14%;
-  --popover-foreground: 60 56% 91%;
+  --background: 222 50% 8%;
+  --foreground: 210 40% 94%;
+  --card: 218 42% 16%;
+  --card-foreground: 210 40% 94%;
+  --popover: 218 42% 16%;
+  --popover-foreground: 210 40% 94%;
   --primary: 43 50% 54%;
   --primary-foreground: 27 35% 21%;
-  --secondary: 24 52% 11%;
-  --secondary-foreground: 60 56% 91%;
-  --muted: 24 52% 11%;
-  --muted-foreground: 38 20% 65%;
+  --secondary: 220 46% 11%;
+  --secondary-foreground: 210 40% 94%;
+  --muted: 220 46% 11%;
+  --muted-foreground: 214 20% 65%;
   --accent: 192 40% 50%;
-  --accent-foreground: 60 56% 91%;
+  --accent-foreground: 210 40% 94%;
   --destructive: 0 84% 60%;
-  --destructive-foreground: 60 56% 91%;
-  --border: 25 30% 22%;
-  --input: 25 30% 22%;
+  --destructive-foreground: 210 40% 94%;
+  --border: 220 35% 22%;
+  --input: 220 35% 22%;
   --ring: 192 40% 50%;
 }
 
@@ -80,7 +80,6 @@
   }
   body {
     @apply bg-background text-foreground font-body antialiased;
-    cursor: none;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
@@ -93,9 +92,51 @@
   }
 }
 
+/* ─── Light-mode section gradients ───────────────────────────────────────────
+   Each section gets a unique multi-tone gradient in light mode.
+   Dark mode falls back to the CSS-var background set by bg-parchment / bg-parchment-deep.
+   ────────────────────────────────────────────────────────────────────────── */
+.bg-section-a {
+  background: linear-gradient(160deg, #FDFCF8 0%, #F5F5DC 50%, #EFF7F5 100%);
+}
+.dark .bg-section-a { background: hsl(var(--color-parchment)); }
+
+.bg-section-b {
+  background: linear-gradient(145deg, #F0EBE0 0%, #ECF4F3 55%, #F5F5DC 100%);
+}
+.dark .bg-section-b { background: hsl(var(--color-parchment-deep)); }
+
+.bg-section-c {
+  background: linear-gradient(135deg, #FBF8F0 0%, #F5F5DC 45%, #EFF7F6 100%);
+}
+.dark .bg-section-c { background: hsl(var(--color-parchment)); }
+
+.bg-section-d {
+  background: linear-gradient(150deg, #F0EBE0 0%, #F7F4EE 50%, #EDF3F2 100%);
+}
+.dark .bg-section-d { background: hsl(var(--color-parchment-deep)); }
+
+.bg-section-e {
+  background: linear-gradient(140deg, #FDFCF8 0%, #F5F5DC 40%, #EEF7F5 100%);
+}
+.dark .bg-section-e { background: hsl(var(--color-parchment)); }
+
+/* ─── Paper grain texture ─────────────────────────────────────────────────── */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+.dark .grain::after { opacity: 0.015; }
+
 @layer components {
   .eyebrow {
-    @apply font-body text-[10px] font-medium tracking-[0.2em] uppercase text-primary;
+    @apply font-body text-[13px] font-medium tracking-[0.2em] uppercase text-primary;
   }
 
   .gold-line {
@@ -134,5 +175,5 @@
   background: #C9A84C55;
 }
 .dark ::-webkit-scrollbar-track {
-  background: #1E0F07;
+  background: #080F1F;
 }

@@ -55,9 +55,21 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="section-padding relative overflow-hidden bg-parchment"
+      className="section-padding relative overflow-hidden bg-section-e grain"
     >
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-gold/[0.05] blur-[120px] pointer-events-none" />
+      {/* Animated ambient orbs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div
+          animate={{ scale: [1, 1.25, 1], opacity: [0.05, 0.09, 0.05], x: [0, 25, 0], y: [0, -20, 0] }}
+          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-gold blur-[120px]"
+        />
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.04, 0.08, 0.04], x: [0, -20, 0] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 7 }}
+          className="absolute top-[20%] right-[5%] w-[320px] h-[320px] rounded-full bg-water blur-[110px]"
+        />
+      </div>
 
       <div className="max-w-7xl mx-auto relative z-10 grid md:grid-cols-2 gap-12 md:gap-20">
         {/* Left: form */}

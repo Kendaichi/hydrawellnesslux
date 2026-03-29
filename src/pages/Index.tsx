@@ -8,12 +8,9 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import CTASection from "@/components/CTASection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
-import CustomCursor from "@/components/CustomCursor";
-
 const Index = () => {
   return (
     <div className="bg-ink min-h-screen">
-      <CustomCursor />
       <Navbar />
       <HeroSection />
       <MarqueeStrip />

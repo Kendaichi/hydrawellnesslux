@@ -30,9 +30,35 @@ const gridItem = {
 
 export default function ScienceSection() {
   return (
-    <section id="the-water" className="section-padding relative overflow-hidden bg-parchment-deep">
-      {/* Warm ambient glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gold/[0.06] blur-[150px] pointer-events-none" />
+    <section id="the-water" className="section-padding relative overflow-hidden bg-section-b grain">
+      {/* Animated orbs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div
+          animate={{ scale: [1, 1.3, 1], opacity: [0.05, 0.1, 0.05], y: [0, 40, 0] }}
+          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full bg-gold blur-[150px]"
+        />
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.04, 0.08, 0.04], x: [0, 40, 0] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 5 }}
+          className="absolute bottom-0 right-[10%] w-[350px] h-[350px] rounded-full bg-water blur-[130px]"
+        />
+        <motion.div
+          animate={{ scale: [1, 1.15, 1], opacity: [0.03, 0.07, 0.03], x: [0, -30, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 9 }}
+          className="absolute top-1/2 left-[5%] w-[280px] h-[280px] rounded-full bg-water blur-[110px]"
+        />
+      </div>
+      {/* Subtle animated dot grid */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.04] dark:opacity-[0.07]" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="science-dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r="1.2" fill="#7BA99C" />
+            <animateTransform attributeName="patternTransform" type="translate" from="0 0" to="40 40" dur="22s" repeatCount="indefinite" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#science-dots)" />
+      </svg>
 
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
@@ -68,7 +94,7 @@ export default function ScienceSection() {
               <h3 className="font-display text-xl md:text-2xl font-light text-ink tracking-tight mb-4">
                 {card.title}
               </h3>
-              <p className="font-body text-sm text-ink/70 leading-relaxed">
+              <p className="font-body text-sm text-ink/90 leading-relaxed">
                 {card.body}
               </p>
             </motion.div>

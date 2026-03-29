@@ -12,7 +12,7 @@ export default function CTASection() {
         className="absolute inset-0 w-full h-full"
         style={{
           background:
-            "linear-gradient(135deg, #0f1a24 0%, #493423 50%, #0f1a24 100%)",
+            "linear-gradient(135deg, #080F1F 0%, #0D1A33 50%, #080F1F 100%)",
         }}
       />
       {/* Animated ambient glow */}

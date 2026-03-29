@@ -32,8 +32,25 @@ export default function LifestyleSection() {
   const [activeTab, setActiveTab] = useState<TabKey>("For You");
 
   return (
-    <section id="lifestyle" className="section-padding bg-parchment relative overflow-hidden">
-      <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full bg-water/[0.06] blur-[130px] pointer-events-none" />
+    <section id="lifestyle" className="section-padding bg-section-c grain relative overflow-hidden">
+      {/* Animated ambient orbs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div
+          animate={{ scale: [1, 1.3, 1], opacity: [0.05, 0.1, 0.05], x: [0, -35, 0], y: [0, -25, 0] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full bg-water blur-[130px]"
+        />
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.04, 0.08, 0.04], x: [0, 30, 0] }}
+          transition={{ duration: 19, repeat: Infinity, ease: "easeInOut", delay: 6 }}
+          className="absolute top-[15%] right-[8%] w-[300px] h-[300px] rounded-full bg-gold blur-[120px]"
+        />
+        <motion.div
+          animate={{ scale: [1, 1.18, 1], opacity: [0.03, 0.07, 0.03], y: [0, 40, 0] }}
+          transition={{ duration: 13, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+          className="absolute top-1/2 left-[55%] w-[250px] h-[250px] rounded-full bg-water blur-[100px]"
+        />
+      </div>
       <div className="max-w-7xl mx-auto">
         <ScrollReveal>
           <p className="eyebrow mb-4 text-center text-water">Lifestyle</p>
@@ -51,7 +68,7 @@ export default function LifestyleSection() {
               className={`font-body text-xs tracking-[0.15em] uppercase pb-2 border-b-2 transition-all duration-300 whitespace-nowrap ${
                 activeTab === tab
                   ? "text-water border-water"
-                  : "text-ink/40 border-transparent hover:text-ink/60"
+                  : "text-ink/70 border-transparent hover:text-ink/90"
               }`}
             >
               {tab}
@@ -81,7 +98,7 @@ export default function LifestyleSection() {
                 <h3 className="font-display text-xl md:text-2xl font-light text-ink tracking-tight mb-4">
                   {card.title}
                 </h3>
-                <p className="font-body text-xs text-ink/70 leading-relaxed">
+                <p className="font-body text-xs text-ink/90 leading-relaxed">
                   {card.body}
                 </p>
               </motion.div>
