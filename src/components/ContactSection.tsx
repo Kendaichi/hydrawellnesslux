@@ -5,7 +5,7 @@ import ScrollReveal from "./ScrollReveal";
 
 const contactInfo = [
   { icon: Mail, label: "Email", value: "kiona@hydraluxwellnesskbl.com" },
-  { icon: Phone, label: "Phone", value: "+1 (800) HWL-PURE" },
+  { icon: Phone, label: "Phone", value: "+44 7394 130939" },
   { icon: AtSign, label: "Social", value: "@hydrawellnesslux" },
 ];
 
@@ -60,13 +60,27 @@ export default function ContactSection() {
       {/* Animated ambient orbs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
-          animate={{ scale: [1, 1.25, 1], opacity: [0.05, 0.09, 0.05], x: [0, 25, 0], y: [0, -20, 0] }}
+          animate={{
+            scale: [1, 1.25, 1],
+            opacity: [0.05, 0.09, 0.05],
+            x: [0, 25, 0],
+            y: [0, -20, 0],
+          }}
           transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
           className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-gold blur-[120px]"
         />
         <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.04, 0.08, 0.04], x: [0, -20, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 7 }}
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.04, 0.08, 0.04],
+            x: [0, -20, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 7,
+          }}
           className="absolute top-[20%] right-[5%] w-[320px] h-[320px] rounded-full bg-water blur-[110px]"
         />
       </div>
